@@ -19,20 +19,14 @@ usersList.addEventListener('change', () => {
             const row = tbody.insertRow(-1);
             
             const cell1 = row.insertCell(0);
-            if(todo.completed === true) {
-                cell1.innerHTML = 'Done';
-            }
-            else if(todo.completed === false) {
-                cell1.innerHTML = 'X';
-            }
+            cell1.innerHTML = todo.description;
             const cell2 = row.insertCell(1);
-            cell2.innerHTML = todo.category;
+            cell2.innerHTML = todo.deadline;
             const cell3 = row.insertCell(2);
-            cell3.innerHTML = todo.description;
-            const cell4 = row.insertCell(3);
-            cell4.innerHTML = todo.deadline;
-            const cell5 = row.insertCell(4);
-            cell5.innerHTML = todo.priority;
+            const link = document.createElement('a');
+            link.text = 'See details';
+            link.href = `./todo_details.html?id=${todo.id}`;
+            cell3.appendChild(link);
         });
     });
     tableEl.style.display = 'table';

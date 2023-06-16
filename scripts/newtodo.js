@@ -4,7 +4,6 @@ const selectEl = document.getElementById('selectEl');
 const selectCategory = document.getElementById('selectCategory');
 const selectUrgency = document.getElementById('selectUrgency');
 const addBtn = document.getElementById('addBtn');
-const userIdEl = document.getElementById('userIdEl');
 
 fetch('http://localhost:8083/api/users').then((response) => response.json()).then((data) => {
     data.forEach(element => {
@@ -23,7 +22,7 @@ fetch('http://localhost:8083/api/categories').then((response) => response.json()
 
     addBtn.addEventListener('click', () => {
         const addToDo = {
-            userid: userIdEl.value,
+            userid: selectEl.options[selectEl.selectedIndex].value,
             category: selectCategory.options[selectCategory.selectedIndex].textContent,
             description: document.getElementById('textareaEl').value,
             deadline: document.getElementById('deadlineEl').value,
@@ -34,7 +33,7 @@ fetch('http://localhost:8083/api/categories').then((response) => response.json()
             body: JSON.stringify(addToDo),
             headers: {'Content-type': 'application/json; charset=utf-8'}
         }).then((response) => response.json()).then((json) => {
-        
+           document.getElementById('taskAdded').innerHTML = 'New todo task has been added';
         });
     });
    
